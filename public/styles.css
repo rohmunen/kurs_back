@@ -1,0 +1,14 @@
+.task_div{
+    margin: 10,10;
+    background-color: rgb(197, 197, 197);
+}
+
+.client_div{
+    margin: 10,10;
+    background-color: rgb(197, 197, 197);
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+}
