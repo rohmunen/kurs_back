@@ -63,7 +63,8 @@ module.exports.createVacancy = async (req, res) => {
         '${req.body.location_details}',
         '${req.body.country_name}',
         '${req.body.country_language}',
-        '${req.body.country_currency}'
+        '${req.body.country_currency}',
+        ${req.body.vacancy_salary}
         )`)
     createvacancy = await pool.connections[1].query(`SELECT createVacancy(${req.body.iss},
         '${req.body.vacancy_name}',
@@ -73,7 +74,8 @@ module.exports.createVacancy = async (req, res) => {
         '${req.body.location_details}',
         '${req.body.country_name}',
         '${req.body.country_language}',
-        '${req.body.country_currency}'
+        '${req.body.country_currency}',
+        ${req.body.vacancy_salary}
         )`).then(response => {
         res.status(200).send('ok')
         return res.rows
