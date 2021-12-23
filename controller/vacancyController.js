@@ -12,7 +12,23 @@ module.exports.skills = async (req,res) => {
 
 module.exports.vacancies = async (req, res) => {
     vacancies = await pool.connections[0].query(`SELECT * FROM getvacancies() as x(vacancy vacancytype);`).then(res=>{
-        return res.rows
+        let results = res.rows
+        let vacs = []
+        let resulting = []
+        let str = ''
+        results.forEach(element => {
+            element.vacancy.substring(1, element.vacancy.length-1).split(',').forEach((element,index) => {
+                if (element[0] == '\"' && element[element.length-1] == '\"'){
+                    vacs.push(element.substring(1, element.length-1))
+                } else {
+                    vacs.push(element)
+                }
+            })
+            resulting.push(vacs.join())
+            vacs = []
+        });
+        console.log(resulting)
+        return resulting
     }).catch(e => {
         console.error(e.stack)
     })
@@ -21,7 +37,15 @@ module.exports.vacancies = async (req, res) => {
 
 module.exports.vacancy = async (req,res) => {
     vacancy = await pool.connections[0].query(`SELECT getVacancy(${req.params.id});`).then(res=>{
-        return res.rows
+        let result = res.rows[0].getvacancy.substring(1, res.rows[0].getvacancy.length - 1).split(',')
+        result.forEach((element,index) => {
+            if (element[0] == '\"' && element[element.length-1] == '\"'){
+                result[index] = element.substring(1, element.length-1)
+            }
+        })
+
+        console.log(res.rows)
+        return result
     }).catch(e => {
         console.error(e.stack)
     })
