@@ -84,3 +84,11 @@ module.exports.createVacancy = async (req, res) => {
         res.status(403).send('notok')
     })
 }
+
+module.exports.deleteVacancy = async(req,res) =>{
+    await pool.connections[1].query(`SELECT deletevacancy(${req.body.iss},${req.body.id})`).then(result => {
+        res.status(200).send('ok')
+    }).catch(e => {
+        console.error(e.stack)
+    })
+}

@@ -35,5 +35,6 @@ app.post('/employeeupdate', authmid.requireAuth, profile.employeeUpdate)
 app.post('/completeemployee', authmid.requireAuth, profile.employeeComplete)
 app.post('/completecompany', authmid.requireAuth, profile.companyComplete)
 app.post('/createvacancy', authmid.requireAuth, vacancies.createVacancy)
+app.post('/deletevacancy', authmid.requireAuth, vacancies.deleteVacancy)
 app.listen(PORT, () => console.log("server is listening"))
 
