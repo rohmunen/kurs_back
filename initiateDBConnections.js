@@ -3,22 +3,16 @@ const con = require('./index')
 
 module.exports.init = async() => {
     connections = []
-    employeePool = await db.connectDB('employee', 'test').then(response => {
+    employeePool = await db.connectDB('employee', 'secret321').then(response => {
     return response
     }).catch(e => {
         console.error(e.stack)
     })
-    companyPool = await db.connectDB('company', 'test').then(response => {
-        return response
-    }).catch(e => {
-        console.error(e.stack)
-    })
-    adminPool = await db.connectDB('admin', 'test').then(response => {
+    companyPool = await db.connectDB('company', 'secret321').then(response => {
         return response
     }).catch(e => {
         console.error(e.stack)
     })
     con.connections.push(employeePool)
     con.connections.push(companyPool)
-    con.connections.push(adminPool)
 }

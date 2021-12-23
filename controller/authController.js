@@ -8,7 +8,7 @@ module.exports.connect = async (req,res) => {
     let hash
     let id
     let role
-    const authPool = await db.connectDB('auth', 'auth').then((value) => {
+    const authPool = await db.connectDB('auth', 'secret321').then((value) => {
         return value
     })
     hash = await authPool.query('SELECT getHash(\'' + req.body.email+'\');').then(res =>{
@@ -43,7 +43,7 @@ module.exports.connect = async (req,res) => {
 module.exports.register = async (req,res) => {
     const salt = await bcrypt.genSalt(10);
     hashed = await bcrypt.hash(req.body.password, salt);
-    const authPool = await db.connectDB('auth', 'auth').then((value) => {
+    const authPool = await db.connectDB('auth', 'secret321').then((value) => {
         return value
     })
     id = await authPool.query(`SELECT register('${req.body.email}', '${hashed}', '${req.body.role}')`).then(result => {
